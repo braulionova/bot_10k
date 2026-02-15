@@ -5,7 +5,9 @@ Cargo.lock
 
 # Environment
 .env
+.env.example
 .env.local
+demo_with_telegram.py
 
 # IDE
 .idea/

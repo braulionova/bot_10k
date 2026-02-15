@@ -1,0 +1,33 @@
+[Unit]
+Description=HyroTrader Bot - Automated Crypto Trading Bot
+After=network.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=nova
+WorkingDirectory=/home/nova/bot_10k
+Environment="RUST_LOG=info"
+Environment="RUST_BACKTRACE=1"
+
+# Cargar variables de entorno desde .env
+EnvironmentFile=/home/nova/bot_10k/.env
+
+# Ejecutar el bot
+ExecStart=/home/nova/bot_10k/target/release/hyrotrader-bot
+
+# Reiniciar automáticamente si falla
+Restart=always
+RestartSec=10
+
+# Límites de recursos
+LimitNOFILE=65536
+MemoryLimit=512M
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=hyrotrader-bot
+
+[Install]
+WantedBy=multi-user.target
